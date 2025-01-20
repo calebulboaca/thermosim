@@ -18,7 +18,7 @@ void setup(){
   
   screen = "temps";
   
-  speed = 10;
+  speed = 5;
   outsideTemp = 20;
   setHouseTemp = 23;
   furnace = new Furnace(100);
@@ -44,6 +44,6 @@ void draw(){
 void update() {
   
   furnace.updateMe();
-  house.updateTemp(furnace.on);
+  house.updateTemp();
 
 }

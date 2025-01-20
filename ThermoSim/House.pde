@@ -14,14 +14,19 @@ class House {
   
   }
   
-  void updateTemp(boolean f) {
+  void updateTemp() {
   
-    if(f) {
-      this.temp += furnace.eff/1000;
+    this.temp += transferLaw(outsideTemp - this.temp);
+    
+    //println(transferLaw(outsideTemp - this.temp));
+    
+    if(furnace.on) {
+      //println("increasing");
+      this.temp += furnace.eff/100;
     } 
-    else {
-      this.temp -= 0.01;
-    }
+    //else {
+    //  this.temp -= 0.01;
+    //}
     
   }
 }

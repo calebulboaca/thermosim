@@ -22,17 +22,60 @@ void displayScreen() {
   text("Outisde", 700, 315);
   
   
+  if (furnace.on) {
+    text("Furnace On", 700, 370);
+  }
+  else {
+    text("Furnace Off", 700, 370);
+  }
   
   
-  fill(0);
-  textAlign(CENTER);
-  textSize(25);
-  text("Desired House Temp", 225, 470);
-  text("Outside Temp", 575, 470);
+  if (screen.equals("temps")) {
+    
+    outsideTempSlider.setVisible(true);
+    houseTempSlider.setVisible(true);
+   
+    heatingSlider.setVisible(false);
+    coolingSlider.setVisible(false);
+    heatingCheckbox.setVisible(false);
+    coolingCheckbox.setVisible(false);
+    
+    fill(0);
+    textAlign(CENTER);
+    textSize(25);
+    text("Desired House Temp", 225, 470);
+    text("Outside Temp", 575, 470);
   
-  //if (screen.equals("intro")) {
+  }
   
+  if (screen.equals("house")) {
   
-  //}
+    outsideTempSlider.setVisible(false);
+    houseTempSlider.setVisible(false);
+    
+    heatingSlider.setVisible(false);
+    coolingSlider.setVisible(false);
+    heatingCheckbox.setVisible(false);
+    coolingCheckbox.setVisible(false);
+    
+  }
+  
+  if (screen.equals("furnace")) {
+  
+    outsideTempSlider.setVisible(false);
+    houseTempSlider.setVisible(false);
+    
+    heatingSlider.setVisible(true);
+    coolingSlider.setVisible(true);
+    heatingCheckbox.setVisible(true);
+    coolingCheckbox.setVisible(true);
+    
+    fill(0);
+    textAlign(CENTER);
+    textSize(25);
+    text("Furnace Power", 620, 470);
+    text("A/C Power", 380, 470);
+    
+  }
 
 }
