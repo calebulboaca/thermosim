@@ -2,9 +2,59 @@ void displayScreen() {
 
   background(255);
   
+  
+  
+  
+  
+  // fill colours:
+  //ground
+  noStroke();
+  fill(64, 161, 40);
+  rect(0, 350, 600, 70);
+  
+  //outside
+  fill(tempToColour(outsideTemp));
+  rect(0, 0, 600, 350);
+  
+  //inside
+  fill(tempToColour(house.temp));
+  rect(200, 200, 200, 150);
+  triangle(200, 200, 300, 100, 400, 200);
+  
+  // App section seperation lines
   strokeWeight(5);
+  stroke(0);
   line(0, 420, width, 420);
   line(600, 0, 600, 420);
+  
+  //ground
+  strokeWeight(3);
+  line(0, 350, 600, 350);
+  
+  //house
+  line(200, 350, 200, 200);
+  line(400, 350, 400, 200);
+  
+  //roof
+  fill(24, 23, 33);
+  noStroke();
+  quad(160, 220, 170, 230, 300, 100, 300, 80);
+  quad(440, 220, 430, 230, 300, 100, 300, 80);
+  stroke(0);
+  line(170, 230, 300, 100);
+  line(430, 230, 300, 100);
+  line(160, 220, 300, 80);
+  line(440, 220, 300, 80);
+  line(170, 230, 160, 220);
+  line(430, 230, 440, 220);
+  
+  //chimney
+  fill(46, 25, 10);
+  quad(380, 160, 380, 90, 340, 90, 340, 120);
+  line(380, 160, 380, 90);
+  line(340, 120, 340, 90);
+  line(380, 90, 340, 90);
+  
   
   
   fill(0);
@@ -75,6 +125,11 @@ void displayScreen() {
     textSize(25);
     text("Furnace Power", 620, 470);
     text("A/C Power", 380, 470);
+    
+    textSize(20);
+    textAlign(LEFT);
+    text("Furnace On", 130, 495);
+    text("A/C On", 130, 523);
     
   }
 

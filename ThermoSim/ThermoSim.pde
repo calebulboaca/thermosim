@@ -1,7 +1,9 @@
 import g4p_controls.*;
 
-Furnace furnace;
+
 House house;
+Furnace furnace;
+AirCon ac;
 float outsideTemp;
 float setHouseTemp;
 int speed;
@@ -18,10 +20,11 @@ void setup(){
   
   screen = "temps";
   
-  speed = 5;
+  speed = 10;
   outsideTemp = 20;
   setHouseTemp = 23;
-  furnace = new Furnace(100);
+  furnace = new Furnace(170);
+  ac = new AirCon(100);
   house = new House(outsideTemp, 10);
   
 }

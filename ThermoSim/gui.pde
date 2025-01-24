@@ -44,11 +44,21 @@ public void custom_slider1_change3(GCustomSlider source, GEvent event) { //_CODE
 } //_CODE_:coolingSlider:577241:
 
 public void checkbox1_clicked1(GCheckbox source, GEvent event) { //_CODE_:heatingCheckbox:707032:
-  println("heatingCheckbox - GCheckbox >> GEvent." + event + " @ " + millis());
+  if (heatingCheckbox.isSelected()) {
+    furnace.enabled = true;
+  }
+  else {
+    furnace.enabled = false;
+  }
 } //_CODE_:heatingCheckbox:707032:
 
 public void checkbox1_clicked2(GCheckbox source, GEvent event) { //_CODE_:coolingCheckbox:977283:
-  println("coolingCheckbox - GCheckbox >> GEvent." + event + " @ " + millis());
+  if (coolingCheckbox.isSelected()) {
+    ac.enabled = true;
+  }
+  else {
+    ac.enabled = false;
+  }
 } //_CODE_:coolingCheckbox:977283:
 
 

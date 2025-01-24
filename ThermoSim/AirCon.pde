@@ -1,4 +1,4 @@
-class Furnace {
+class AirCon {
 
   //Fields
   int eff;
@@ -6,7 +6,7 @@ class Furnace {
   boolean on;
   
   //Constructor
-  Furnace(int e) {
+  AirCon(int e) {
     this.eff = e;
     this.enabled = true;
   }
@@ -22,7 +22,7 @@ class Furnace {
     if (this.enabled) {
       //println(setHouseTemp - house.temp);
       //println(this.on);
-      if( (setHouseTemp - house.temp) > 1) {
+      if( (setHouseTemp - house.temp) > -1 ) {
         this.on = true;
       }
       else{
@@ -34,4 +34,5 @@ class Furnace {
       this.on = false;
     }
   }
+  
 }

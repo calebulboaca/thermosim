@@ -22,7 +22,7 @@ class House {
     
     if(furnace.on) {
       //println("increasing");
-      this.temp += furnace.eff/100;
+      this.temp += furnace.eff/100.0;
     } 
     //else {
     //  this.temp -= 0.01;
