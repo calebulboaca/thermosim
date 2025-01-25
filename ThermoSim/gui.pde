@@ -36,11 +36,11 @@ public void button1_click3(GButton source, GEvent event) { //_CODE_:furnaceButto
 } //_CODE_:furnaceButton:961810:
 
 public void custom_slider1_change2(GCustomSlider source, GEvent event) { //_CODE_:heatingSlider:400247:
-  println("heatingSlider - GCustomSlider >> GEvent." + event + " @ " + millis());
+  furnace.eff = heatingSlider.getValueF() * (150.0/100.0); // 100 - 150 scaling
 } //_CODE_:heatingSlider:400247:
 
 public void custom_slider1_change3(GCustomSlider source, GEvent event) { //_CODE_:coolingSlider:577241:
-  println("coolingSlider - GCustomSlider >> GEvent." + event + " @ " + millis());
+  ac.eff = coolingSlider.getValueF();
 } //_CODE_:coolingSlider:577241:
 
 public void checkbox1_clicked1(GCheckbox source, GEvent event) { //_CODE_:heatingCheckbox:707032:
@@ -61,6 +61,23 @@ public void checkbox1_clicked2(GCheckbox source, GEvent event) { //_CODE_:coolin
   }
 } //_CODE_:coolingCheckbox:977283:
 
+public void insulation_change1(GCustomSlider source, GEvent event) { //_CODE_:insulationSlider:516896:
+  house.insulation = insulationSlider.getValueF();
+} //_CODE_:insulationSlider:516896:
+
+public void tempRange_change1(GCustomSlider source, GEvent event) { //_CODE_:tempRangeSlider:231429:
+   house.range = tempRangeSlider.getValueF();
+} //_CODE_:tempRangeSlider:231429:
+
+public void auto_clicked1(GCheckbox source, GEvent event) { //_CODE_:autoCheckbox:696244:
+  if (autoCheckbox.isSelected()) {
+    autoTemp = true;
+  }
+  else {
+    autoTemp = false;
+    outsideTemp = outsideTempSlider.getValueF();
+  }
+} //_CODE_:autoCheckbox:696244:
 
 
 // Create all the GUI controls. 
@@ -81,24 +98,27 @@ public void createGUI(){
   houseTempSlider = new GCustomSlider(this, 100, 480, 250, 50, "purple18px");
   houseTempSlider.setShowValue(true);
   houseTempSlider.setShowLimits(true);
-  houseTempSlider.setLimits(23.0, 15.0, 30.0);
+  houseTempSlider.setLimits(23.0, 10.0, 30.0);
   houseTempSlider.setNumberFormat(G4P.DECIMAL, 2);
-  houseTempSlider.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  houseTempSlider.setLocalColorScheme(GCScheme.CYAN_SCHEME);
   houseTempSlider.setOpaque(true);
   houseTempSlider.addEventHandler(this, "custom_slider2_change1");
   tempsButton = new GButton(this, 160, 550, 80, 30);
   tempsButton.setText("Temps");
+  tempsButton.setLocalColorScheme(GCScheme.CYAN_SCHEME);
   tempsButton.addEventHandler(this, "button1_click1");
   houseButton = new GButton(this, 360, 550, 80, 30);
   houseButton.setText("House");
+  houseButton.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   houseButton.addEventHandler(this, "button1_click2");
   furnaceButton = new GButton(this, 560, 550, 80, 30);
-  furnaceButton.setText("Furnace");
+  furnaceButton.setText("Heat / AC");
+  furnaceButton.setLocalColorScheme(GCScheme.RED_SCHEME);
   furnaceButton.addEventHandler(this, "button1_click3");
   heatingSlider = new GCustomSlider(this, 520, 480, 200, 50, "red_yellow18px");
   heatingSlider.setShowValue(true);
   heatingSlider.setShowLimits(true);
-  heatingSlider.setLimits(50, 0, 100);
+  heatingSlider.setLimits(100, 0, 100);
   heatingSlider.setNumberFormat(G4P.INTEGER, 0);
   heatingSlider.setLocalColorScheme(GCScheme.RED_SCHEME);
   heatingSlider.setOpaque(true);
@@ -106,7 +126,7 @@ public void createGUI(){
   coolingSlider = new GCustomSlider(this, 280, 480, 200, 50, "blue18px");
   coolingSlider.setShowValue(true);
   coolingSlider.setShowLimits(true);
-  coolingSlider.setLimits(50, 0, 100);
+  coolingSlider.setLimits(80, 0, 100);
   coolingSlider.setNbrTicks(50);
   coolingSlider.setNumberFormat(G4P.INTEGER, 0);
   coolingSlider.setOpaque(true);
@@ -120,6 +140,28 @@ public void createGUI(){
   coolingCheckbox.setOpaque(true);
   coolingCheckbox.addEventHandler(this, "checkbox1_clicked2");
   coolingCheckbox.setSelected(true);
+  
+  insulationSlider = new GCustomSlider(this, 100, 480, 250, 50, "purple18px");
+  insulationSlider.setShowValue(true);
+  insulationSlider.setShowLimits(true);
+  insulationSlider.setLimits(50, 0, 100);
+  insulationSlider.setNumberFormat(G4P.INTEGER, 0);
+  insulationSlider.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  insulationSlider.setOpaque(true);
+  insulationSlider.addEventHandler(this, "insulation_change1");
+  tempRangeSlider = new GCustomSlider(this, 450, 480, 250, 50, "red_yellow18px");
+  tempRangeSlider.setShowValue(true);
+  tempRangeSlider.setShowLimits(true);
+  tempRangeSlider.setLimits(0.5, 0.25, 3.0);
+  tempRangeSlider.setNumberFormat(G4P.DECIMAL, 2);
+  tempRangeSlider.setLocalColorScheme(GCScheme.GREEN_SCHEME);
+  tempRangeSlider.setOpaque(true);
+  tempRangeSlider.addEventHandler(this, "tempRange_change1");
+  
+  autoCheckbox = new GCheckbox(this, 395, 500, 20, 20);
+  autoCheckbox.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
+  autoCheckbox.setOpaque(false);
+  autoCheckbox.addEventHandler(this, "auto_clicked1");
 }
 
 // Variable declarations 
@@ -133,3 +175,6 @@ GCustomSlider heatingSlider;
 GCustomSlider coolingSlider; 
 GCheckbox heatingCheckbox; 
 GCheckbox coolingCheckbox; 
+GCustomSlider insulationSlider; 
+GCustomSlider tempRangeSlider;
+GCheckbox autoCheckbox; 

@@ -1,28 +1,25 @@
+// Air conditioner
 class AirCon {
 
   //Fields
-  int eff;
+  float eff;
   boolean enabled;
   boolean on;
   
   //Constructor
-  AirCon(int e) {
+  AirCon(float e) {
     this.eff = e;
     this.enabled = true;
   }
   
   //Methods
-  void drawMe() {
-  
-  
-  }
-  
   void updateMe() {
     
-    if (this.enabled) {
-      //println(setHouseTemp - house.temp);
-      //println(this.on);
-      if( (setHouseTemp - house.temp) > -1 ) {
+    // only update if ac on and furnace not on
+    if (this.enabled && !furnace.on) {
+      
+      // Feedback loop - turn on based on user set temp +/- range
+      if( (house.temp - setHouseTemp) > -house.range ) {
         this.on = true;
       }
       else{
